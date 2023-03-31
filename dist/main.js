@@ -5,15 +5,24 @@ var b_body = document.createElement("body");
 b_body.innerHTML = document.body.innerHTML;
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = "/dist/html2canvas.min.js";
+    script.src = "https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/html2canvas.min.js";
+    var script2 = document.createElement('script');
+    script2.type = 'text/javascript';
+    script2.src = "https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/FileSaver.js";
+   
+    var st = document.createElement("link");
+    st.rel = "stylesheet";
+    st.type = 'text/css';
+    st.href=  "https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/screenshot.css";
+    st.media = 'all';
 
-    // Then bind the event to the callback function.
-    // There are several events for cross browser compatibility.
     script.onreadystatechange = takeScreenshot;
     script.onload = takeScreenshot;
 
     // Fire the loading
     head.appendChild(script);
+    head.appendChild(script2);
+    head.appendChild(st);
 
    
     let startX, startY, endX, endY;
