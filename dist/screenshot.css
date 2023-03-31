@@ -1,0 +1,31 @@
+.main_cav{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: auto;
+    z-index: 10;
+}
+.overlay{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: auto;
+    z-index: 15;
+    pointer-events: none;
+}
+.pop_container{
+   
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    z-index: 20;
+    pointer-events: all;
+    height: 100%;
+}
+.server_container{
+    z-index: 21;
+}
