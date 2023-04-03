@@ -48,10 +48,10 @@ b_body.innerHTML = document.body.innerHTML;
         const img = new Image();
         img.onload = function() {
           // Create a canvas element and set its dimensions
-          canvas.width = img.width;
-          canvas.height = img.height;
-          canvas2.width = img.width;
-          canvas2.height = img.height;
+          canvas.width = body.offsetWidth + body.style.margin;
+          canvas.height = body.offsetHeight;
+          canvas2.width = body.offsetWidth + body.style.margin;
+          canvas2.height = body.offsetHeight;
       
           // Get the canvas context and draw the image onto the canvas
           const ctx = canvas.getContext('2d');
@@ -59,7 +59,7 @@ b_body.innerHTML = document.body.innerHTML;
           ctx2.fillStyle = 'rgba(0, 0, 0, 0.5)';
           ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
           ctx2.stroke();
-          ctx.drawImage(img, 0, 0, img.width, img.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           
           canvas.addEventListener('mousedown', handleMouseDown);
           window.addEventListener('mouseup', handleMouseUp);
@@ -143,31 +143,37 @@ b_body.innerHTML = document.body.innerHTML;
         image.src = dataUrl;
       }
       function popup(src){
-        canvas.removeEventListener('mousedown', handleMouseDown);
-        window.removeEventListener('mouseup', handleMouseUp);
-        canvas.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('mousemove', handleMouseMove);
-        const ctx2 = canvas2.getContext('2d');
-        ctx2.clearRect(0, 0, canvas.width, canvas.height);
-        ctx2.fillStyle = 'rgba(0, 0, 0, 0.5)';
-        ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
-        ctx2.stroke();
-        let overlay = document.createElement("div");
-        overlay.id="overlay"
-        overlay.classList.add("overlay","pop_container");
+        reset();
+       
         let popup = `
-             <div>
-             <img src="${src}" />
-             <div>
-             <button onclick='saveAs("${src}","screen_shot.png")'>Download</button>
-             <button onclick='getserver("${src}")'>Send to server</button>
-             <button onclick="closepop('overlay')">Cancel</button>
-             
-             </div>
-             </div>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Screen Shot</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/screenshot.css">
+            <script src="https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/FileSaver.js"></script>
+            <script src="/dist/util.js"></script>
+        </head>
+        <body>
+            <div>
+                <img src="${src}" />
+                <div>
+                <button onclick='saveAs("${src}","screen_shot.png")'>Download</button>
+                <button onclick='getserver("${src}")'>Send to server</button>
+                <button onclick="closepop('overlay')">Cancel</button>
+                
+                </div>
+                </div>
+        </body>
+        </html>
         `;
-        overlay.innerHTML= popup;
-        document.body.appendChild(overlay);
+        var myWindow = window.open("", "_blank");
+  myWindow.document.open();
+  myWindow.document.write(popup);
+  myWindow.document.close();
       }
       function getserver(src){
         let overlay = document.createElement("div");
