@@ -1,3 +1,4 @@
+
 var head = document.getElementsByTagName('head')[0];
 var b_head = document.createComment("head");
 b_head.innerHTML =  document.getElementsByTagName('head')[0].innerHTML;
@@ -25,7 +26,9 @@ b_body.innerHTML = document.body.innerHTML;
     head.appendChild(st);
 
    
-    let startX, startY, endX, endY;
+   if (typeof startX != 'undefined' ) {
+     window.startX, window.startY, window.endX, window.endY;
+   }
     var canvas = document.createElement('canvas');
     var canvas2 = document.createElement('canvas');
     
