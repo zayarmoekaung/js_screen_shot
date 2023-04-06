@@ -75,6 +75,8 @@ b_body.innerHTML = document.body.innerHTML;
         img.src = src;
       }
       function drawSelectionRect(x, y, width, height) {
+       width = width -x ;
+       height = height -y;
         const ctx = canvas2.getContext('2d');
 
         // Save the current canvas state
@@ -99,7 +101,7 @@ b_body.innerHTML = document.body.innerHTML;
         // Store the starting coordinates of the selection rectangle
         startX = e.clientX + window.pageXOffset - canvas.offsetLeft;
         startY = e.clientY + window.pageYOffset - canvas.offsetTop;
-    
+       
         // Add event listeners to track the mouse movements
         canvas.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mousemove', handleMouseMove);
@@ -109,6 +111,7 @@ b_body.innerHTML = document.body.innerHTML;
         // Update the ending coordinates of the selection rectangle
         endX = e.clientX + window.pageXOffset - canvas.offsetLeft;
         endY = e.clientY + window.pageYOffset - canvas.offsetTop;
+       
         drawSelectionRect(startX, startY, endX, endY);
     }
       
@@ -255,7 +258,7 @@ b_body.innerHTML = document.body.innerHTML;
           
           head = document.getElementsByTagName('head')[0] ;
           head.innerHTML = b_head.innerHTML;
-          console.log("end", b_body);
+          
           var script = document.getElementById('screenshot');
 
 // Remove the script element
