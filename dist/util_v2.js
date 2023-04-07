@@ -1,6 +1,6 @@
 function send(src) {
     let text = '';
-    let add = 'http://otamyanmar.com/rsv/';
+    let add = 'https://torijun.com/magic/';
     
     // (A) FETCH IMAGE FILE FROM URL
     fetch(src)
