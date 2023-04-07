@@ -2,22 +2,38 @@ function send(src){
     let text = '';
     let inp = document.getElementById('server_add');
     let add = inp.value;
-    var data = new FormData();
-    data.append("screenshot", src);
-
-// (B) UPLOAD SCREENSHOT TO SERVER
-fetch(add, { method:"post", body:data })
-.then(res => res.text())
-.then(txt => text=txt);
-if (text != '') {
-    alert(text);
-    reset()
-
-}else{
-    alert("Server not responded");
-    closeserver('server');
-}
-
+    // (A) FETCH IMAGE FILE FROM URL
+    fetch(src)
+      .then(res => res.blob())
+      .then(blob => {
+        // (B) CREATE FILE OBJECT FROM FETCHED IMAGE DATA
+        var file = new File([blob], "screenshot.jpg", { type: "image/jpeg" });
+  
+        // (C) UPLOAD SCREENSHOT TO SERVER
+        var data = new FormData();
+        data.append("screenshot", file);
+        fetch(add, { method: "post", body: data })
+          .then(res => res.text())
+          .then(txt => {
+            text = txt;
+            if (text != '') {
+              console.log(text);
+              alert(text);
+             
+            } else {
+              console.log("Server not responded");
+              alert("Server not responded");
+            }
+          })
+          .catch(err => {
+            console.error("Error sending screenshot:", err);
+            alert("Error sending screenshot:", err);
+          });
+      })
+      .catch(err => {
+        console.error("Error fetching screenshot:", err);
+        alert("Error fetching screenshot:", err)
+      });
   }
   function closeserver(id) {
     document.getElementById(id).remove();
