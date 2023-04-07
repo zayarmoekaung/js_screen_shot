@@ -161,7 +161,7 @@ b_body.innerHTML = document.body.innerHTML;
             <title>Screen Shot</title>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/screenshot.css">
             <script src="https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/FileSaver.js"></script>
-            <script src="https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/util_v2.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/util2.js"></script>
         </head>
         <body>
             <div>
