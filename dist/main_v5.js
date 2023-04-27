@@ -4,7 +4,8 @@ var b_head = document.createComment("head");
 b_head.innerHTML =  document.getElementsByTagName('head')[0].innerHTML;
 var b_body = document.createElement("body");
 b_body.innerHTML = document.body.innerHTML;
-let loading = document.createElement("section");
+if (typeof loading == 'undefined') {
+window.loading = document.createElement("section");
 loading.id = 'loading';
 loading.innerHTML = `
 <style  type="text/css">
@@ -123,6 +124,7 @@ loading.innerHTML = `
 </div>
 
 `;
+}
 document.body.appendChild(loading);
     var script = document.createElement('script');
     script.type = 'text/javascript';
@@ -156,14 +158,24 @@ document.body.appendChild(loading);
       
         // Get the whole body element
         const body = document.body;
-        body.removeChild(loading);
-        // Use html2canvas to take a screenshot of the body element
-        html2canvas(body).then(canvas => {
+
+        // Define an array of selectors for the elements to ignore
+        const ignoreSelectors = ['#loading'];
+        
+        // Use html2canvas to take a screenshot of the body element, excluding the elements to ignore
+        html2canvas(body, {
+          ignoreElements: (element) => {
+            // Check if the element matches any of the ignore selectors
+            return ignoreSelectors.some((selector) => element.matches(selector));
+          }
+        }).then(canvas => {
           // Convert the canvas to a data URL and create an image element
           const dataUrl = canvas.toDataURL();
           crop(dataUrl);
+         
         });
         
+       
       
       }
       function crop(src) {
@@ -194,6 +206,7 @@ document.body.appendChild(loading);
           shadow.appendChild(canvas2);
           body.appendChild(box);
           body.appendChild(shadow);
+          loading.remove();
         }
         img.src = src;
       }
@@ -281,7 +294,7 @@ document.body.appendChild(loading);
             <title>Screen Shot</title>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/screenshot.css">
             <script src="https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/FileSaver.js"></script>
-            <script src="/dist/util2.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/zayarmoekaung/js_screen_shot/dist/util2.js"></script>
         </head>
         <body>
             <div>
