@@ -394,8 +394,8 @@ document.body.appendChild(loading);
         canvas.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('mousemove', handleMouseMove);
         body = document.body;
-          body.removeChild(canvas);
-          body.removeChild(canvas2);
+        canvas.remove();
+        canvas2.remove();
           
           head = document.getElementsByTagName('head')[0] ;
           head.innerHTML = b_head.innerHTML;
